@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 29 Jun 2022 pada 19.05
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 7.4.24
+-- Generation Time: Jun 30, 2022 at 01:13 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_admin`
+-- Table structure for table `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -37,7 +37,7 @@ CREATE TABLE `tb_admin` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_cart`
+-- Table structure for table `tb_cart`
 --
 
 CREATE TABLE `tb_cart` (
@@ -50,7 +50,7 @@ CREATE TABLE `tb_cart` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_customer`
+-- Table structure for table `tb_customer`
 --
 
 CREATE TABLE `tb_customer` (
@@ -65,7 +65,7 @@ CREATE TABLE `tb_customer` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_detailorder`
+-- Table structure for table `tb_detailorder`
 --
 
 CREATE TABLE `tb_detailorder` (
@@ -81,7 +81,7 @@ CREATE TABLE `tb_detailorder` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kategori`
+-- Table structure for table `tb_kategori`
 --
 
 CREATE TABLE `tb_kategori` (
@@ -90,7 +90,7 @@ CREATE TABLE `tb_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_kategori`
+-- Dumping data for table `tb_kategori`
 --
 
 INSERT INTO `tb_kategori` (`id`, `categoryName`) VALUES
@@ -101,7 +101,7 @@ INSERT INTO `tb_kategori` (`id`, `categoryName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_order`
+-- Table structure for table `tb_order`
 --
 
 CREATE TABLE `tb_order` (
@@ -116,7 +116,7 @@ CREATE TABLE `tb_order` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_produk`
+-- Table structure for table `tb_produk`
 --
 
 CREATE TABLE `tb_produk` (
@@ -129,7 +129,7 @@ CREATE TABLE `tb_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_produk`
+-- Dumping data for table `tb_produk`
 --
 
 INSERT INTO `tb_produk` (`id`, `productName`, `img`, `stock`, `categoryId`, `price`) VALUES
@@ -146,7 +146,7 @@ INSERT INTO `tb_produk` (`id`, `productName`, `img`, `stock`, `categoryId`, `pri
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_shippinginfo`
+-- Table structure for table `tb_shippinginfo`
 --
 
 CREATE TABLE `tb_shippinginfo` (
@@ -158,133 +158,166 @@ CREATE TABLE `tb_shippinginfo` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL,
-  `customerId` int(11) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `loginStatus` varchar(10) NOT NULL,
+  `name` int(11) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `image` varchar(128) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `is_active` int(1) NOT NULL,
   `registerDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_userrole`
+--
+
+CREATE TABLE `tb_userrole` (
+  `id` int(11) NOT NULL,
+  `role` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_userrole`
+--
+
+INSERT INTO `tb_userrole` (`id`, `role`) VALUES
+(1, 'Administrator'),
+(2, 'Customer');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tb_admin`
+-- Indexes for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_cart`
+-- Indexes for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_customer`
+-- Indexes for table `tb_customer`
 --
 ALTER TABLE `tb_customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_detailorder`
+-- Indexes for table `tb_detailorder`
 --
 ALTER TABLE `tb_detailorder`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_kategori`
+-- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_order`
+-- Indexes for table `tb_order`
 --
 ALTER TABLE `tb_order`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_produk`
+-- Indexes for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_shippinginfo`
+-- Indexes for table `tb_shippinginfo`
 --
 ALTER TABLE `tb_shippinginfo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_user`
+-- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- Indexes for table `tb_userrole`
+--
+ALTER TABLE `tb_userrole`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_admin`
+-- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_cart`
+-- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_customer`
+-- AUTO_INCREMENT for table `tb_customer`
 --
 ALTER TABLE `tb_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_detailorder`
+-- AUTO_INCREMENT for table `tb_detailorder`
 --
 ALTER TABLE `tb_detailorder`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_kategori`
+-- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_order`
+-- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_produk`
+-- AUTO_INCREMENT for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_shippinginfo`
+-- AUTO_INCREMENT for table `tb_shippinginfo`
 --
 ALTER TABLE `tb_shippinginfo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_user`
+-- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_userrole`
+--
+ALTER TABLE `tb_userrole`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
