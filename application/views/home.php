@@ -9,11 +9,11 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="<?= base_url();?>assets/img/favicon.ico" rel="icon">
+    <link href="<?= base_url(); ?>assets/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link href="<?= base_url() ?>assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?= base_url();?>assets/css/style.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -101,9 +101,11 @@
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <a href="" class="nav-item nav-link">Fiksi</a>
-                        <a href="" class="nav-item nav-link">Non Fiksi</a>
-                        <a href="" class="nav-item nav-link">Pengetahuan</a>
+                        <?php $j = 1; ?>
+                        <?php foreach ($kategori as $row) : ?>
+                            <a href="" class="nav-item nav-link"><?= $row['categoryName'] ?></a>
+                            <?php $j++; ?>
+                        <?php endforeach; ?>
                     </div>
                 </nav>
             </div>
@@ -117,19 +119,25 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="<?= base_url() ?>" class="nav-item nav-link">Home</a>
+                            <a href="<?= base_url() ?>shop" class="nav-item nav-link">Shop</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            <a href="<?= base_url() ?>auth" class="nav-item nav-link">Login</a>
                         </div>
                     </div>
                 </nav>
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="height: 410px;">
-                            <img class="img-fluid" src="<?= base_url();?>assets/img/carousel-1.jpg" alt="Image">
+                            <img class="img-fluid" src="<?= base_url(); ?>assets/img/carousel-1.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
@@ -139,7 +147,7 @@
                             </div>
                         </div>
                         <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="<?= base_url();?>assets/img/carousel-2.jpg" alt="Image">
+                            <img class="img-fluid" src="<?= base_url(); ?>assets/img/carousel-2.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
@@ -201,19 +209,19 @@
     <!-- Categories Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
-        <?php $i = 1; ?>
-        <?php foreach ($kategori as $row) : ?>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <p class="text-right">3 Products</p>
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid" src="<?= base_url();?>assets/img/cat-<?=$i?>.jpg" alt="">
-                    </a>
-                    <h5 class="font-weight-semi-bold m-0"><?= $row['categoryName'] ?></h5>
+            <?php $i = 1; ?>
+            <?php foreach ($kategori as $row) : ?>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        <p class="text-right">3 Products</p>
+                        <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                            <img class="img-fluid" src="<?= base_url(); ?>assets/img/cat-<?= $i ?>.jpg" alt="">
+                        </a>
+                        <h5 class="font-weight-semi-bold m-0"><?= $row['categoryName'] ?></h5>
+                    </div>
                 </div>
-            </div>
-            <?php $i++; ?>
-            <?php endforeach ;?>
+                <?php $i++; ?>
+            <?php endforeach; ?>
         </div>
     </div>
     <!-- Categories End -->
@@ -224,7 +232,7 @@
         <div class="row px-xl-5">
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-                    <img src="<?= base_url();?>assets/img/offer-1.png" alt="">
+                    <img src="<?= base_url(); ?>assets/img/offer-1.png" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Fiksi Collection</h1>
@@ -234,7 +242,7 @@
             </div>
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                    <img src="<?= base_url();?>assets/img/offer-2.png" alt="">
+                    <img src="<?= base_url(); ?>assets/img/offer-2.png" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Non Fiksi Collection</h1>
@@ -256,12 +264,13 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="<?= base_url();?>assets/img-fluid w-100" src="img/product-1.jpg" alt="">
+                        <img class="<?= base_url(); ?>assets/img-fluid w-100" src="img/product-1.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h6>$123.00</h6>
+                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
@@ -273,12 +282,13 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<?= base_url();?>assets/img/product-2.jpg" alt="">
+                        <img class="img-fluid w-100" src="<?= base_url(); ?>assets/img/product-2.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h6>$123.00</h6>
+                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
@@ -290,12 +300,13 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<?= base_url();?>assets/img/product-3.jpg" alt="">
+                        <img class="img-fluid w-100" src="<?= base_url(); ?>assets/img/product-3.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h6>$123.00</h6>
+                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
@@ -307,12 +318,13 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<?= base_url();?>assets/img/product-4.jpg" alt="">
+                        <img class="img-fluid w-100" src="<?= base_url(); ?>assets/img/product-4.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h6>$123.00</h6>
+                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
@@ -325,8 +337,8 @@
     </div>
     <!-- Products End -->
 
- <!-- Footer Start -->
- <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <a href="" class="text-decoration-none">
@@ -368,8 +380,7 @@
                                 <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                    required="required" />
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
                             </div>
                             <div>
                                 <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
@@ -389,7 +400,7 @@
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="<?= base_url();?>assets/img/payments.png" alt="">
+                <img class="img-fluid" src="<?= base_url(); ?>assets/img/payments.png" alt="">
             </div>
         </div>
     </div>
@@ -403,15 +414,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url();?>assets/lib/easing/easing.min.js"></script>
-    <script src="<?= base_url();?>assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="<?= base_url(); ?>assets/lib/easing/easing.min.js"></script>
+    <script src="<?= base_url(); ?>assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="<?= base_url();?>assets/mail/jqBootstrapValidation.min.js"></script>
-    <script src="<?= base_url();?>assets/mail/contact.js"></script>
+    <script src="<?= base_url(); ?>assets/mail/jqBootstrapValidation.min.js"></script>
+    <script src="<?= base_url(); ?>assets/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="<?= base_url();?>assets/js/main.js"></script>
+    <script src="<?= base_url(); ?>assets/js/main.js"></script>
 </body>
 
 </html>

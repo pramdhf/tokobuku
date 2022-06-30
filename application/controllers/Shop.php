@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Shop extends CI_Controller {
+class Shop extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -21,8 +22,8 @@ class Shop extends CI_Controller {
 	public function index()
 	{
 		$data['tittle'] = "Shop | TokoBuku";
-		$data['kategori'] = $this->db->get('tb_kategori')->result_array();
-		
-		$this->load->view('home', $data);
+		$data['produk'] = $this->db->get('tb_produk')->result_array();
+
+		$this->load->view('shop', $data);
 	}
 }
