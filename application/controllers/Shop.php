@@ -23,7 +23,7 @@ class Shop extends CI_Controller
 	{
 		$data['tittle'] = "Shop | TokoBuku";
 		$data['produk'] = $this->db->get('tb_produk')->result_array();
-
-		$this->load->view('shop', $data);
+		$data['isi'] = $this->load->view('shop', $data, true);
+		$this->load->view('main_view', $data);
 	}
 }

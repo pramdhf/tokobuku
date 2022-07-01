@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 	{
 		$data['tittle'] = "Home | TokoBuku";
 		$data['kategori'] = $this->db->get('tb_kategori')->result_array();
-		
-		$this->load->view('home', $data);
+		$data['isi'] = $this->load->view('home', $data, true);
+		$this->load->view('main_view', $data);
 	}
 }
