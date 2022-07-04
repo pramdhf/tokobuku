@@ -14,7 +14,7 @@ class Auth extends CI_Controller
     {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        
+
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login | TokoBuku';
             $this->load->view('templates/auth_header',  $data);
@@ -25,43 +25,62 @@ class Auth extends CI_Controller
         }
     }
 
-    public function _login(){
+    public function _login()
+    {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-        
+
 
         $user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
 
         //jika usernya ada
         if ($user) {
-            //jika user aktif
-            if ($user['is_active'] == 1) {
+
+            if ($user['role_id'] == 2) {
+                # 
+
+                //jika user aktif
+                if ($user['is_active'] == 1) {
+                    //cek password
+                    if (password_verify($password, $user['password'])) {
+                        $data = [
+                            'email'     => $user['email']
+                        ];
+                        $this->session->set_userdata($data);
+                        redirect(base_url());
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'alert("Password Salah!");';
+                        echo 'window.location.href ="' . base_url() .  '/auth";';
+                        echo '</script>';
+                    }
+                } else {
+                    echo '<script type="text/javascript">';
+                    echo 'alert("User tidak aktif");';
+                    echo 'window.location.href ="' . base_url() .  '/auth";';
+                    echo '</script>';
+                }
+            } else {
                 //cek password
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email'     => $user['email']
                     ];
                     $this->session->set_userdata($data);
-                    redirect(base_url());
+                    redirect(base_url('admin/produk'));
                 } else {
                     echo '<script type="text/javascript">';
                     echo 'alert("Password Salah!");';
-                    echo 'window.location.href ="' .base_url().  '/auth";';
+                    echo 'window.location.href ="' . base_url() .  '/auth";';
                     echo '</script>';
                 }
-            } else {
-                    echo '<script type="text/javascript">';
-                    echo 'alert("User tidak aktif");';
-                    echo 'window.location.href ="' .base_url().  '/auth";';
-                    echo '</script>';
             }
         } else {
             echo '<script type="text/javascript">';
             echo 'alert("User belum terdaftar!");';
-            echo 'window.location.href ="' .base_url().  '/auth";';
+            echo 'window.location.href ="' . base_url() .  '/auth";';
             echo '</script>';
         }
-
     }
 
     public function registration()
@@ -94,7 +113,7 @@ class Auth extends CI_Controller
             $this->db->insert('tb_user', $data);
             echo '<script type="text/javascript">';
             echo 'alert("Register Sukses");';
-            echo 'window.location.href ="' .base_url().  '/auth";';
+            echo 'window.location.href ="' . base_url() .  '/auth";';
             echo '</script>';
         }
     }
@@ -104,8 +123,8 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
 
         echo '<script type="text/javascript">';
-            echo 'alert("Berhasil Logout!");';
-            echo 'window.location.href ="' .base_url().  'auth";';
-            echo '</script>';
+        echo 'alert("Berhasil Logout!");';
+        echo 'window.location.href ="' . base_url() .  'auth";';
+        echo '</script>';
     }
 }
