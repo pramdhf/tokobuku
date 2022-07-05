@@ -26,13 +26,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url() ?>" class="nav-item nav-link">Home</a>
                             <a href="<?= base_url() ?>shop" class="nav-item nav-link active">Shop</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                         <?php 

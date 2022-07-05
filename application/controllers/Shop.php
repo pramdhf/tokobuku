@@ -23,6 +23,7 @@ class Shop extends CI_Controller
 	{
 		$data['tittle'] = "Shop | Dunia Ilmu";
 		$data['produk'] = $this->db->get('tb_produk')->result_array();
+		$data['total'] = $this->cart->total_items();
 		$data['isi'] = $this->load->view('shop', $data, true);
 		$this->load->view('main_view', $data);
 	}
@@ -39,6 +40,7 @@ class Shop extends CI_Controller
                 redirect(base_url());
             } else {
 		$data['tittle'] = "Detail | Dunia Ilmu";
+		$data['total'] = $this->cart->total_items();
 		$data['product'] = $this->db->where('id_produk', $idProduk)->get('tb_produk')->row_array();
 		$data['isi'] = $this->load->view('detail', $data, true);
 		$this->load->view('main_view', $data);
