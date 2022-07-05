@@ -22,6 +22,7 @@ class Home extends CI_Controller {
 	{
 		$data['tittle'] = "Home | Dunia Ilmu";
 		$data['kategori'] = $this->db->get('tb_kategori')->result_array();
+		$data['total'] = $this->cart->total_items();
 		$data['isi'] = $this->load->view('home', $data, true);
 		$this->load->view('main_view', $data);
 	}

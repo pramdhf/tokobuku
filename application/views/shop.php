@@ -29,13 +29,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url() ?>" class="nav-item nav-link">Home</a>
                             <a href="<?= base_url() ?>shop" class="nav-item nav-link active">Shop</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                         <?php 
@@ -143,7 +136,7 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                     <a href="<?= base_url(); ?>shop/detail?id=<?=$row['id_produk']?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                    <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                    <a href="<?=base_url();?>keranjang/tambah/<?=$row['id_produk']?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                 </div>
                             </div>
                         </div>
