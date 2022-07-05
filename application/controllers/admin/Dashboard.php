@@ -10,5 +10,6 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/dashboard_topbar');
         $this->load->view('admin/dashboard');
         $this->load->view('templates/dashboard_footer');
+        //edit
     }
 }
