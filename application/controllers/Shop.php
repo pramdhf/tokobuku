@@ -21,9 +21,31 @@ class Shop extends CI_Controller
 	 */
 	public function index()
 	{
-		$data['tittle'] = "Shop | TokoBuku";
+		$data['tittle'] = "Shop | Dunia Ilmu";
 		$data['produk'] = $this->db->get('tb_produk')->result_array();
 		$data['isi'] = $this->load->view('shop', $data, true);
 		$this->load->view('main_view', $data);
+	}
+
+	public function detail() {
+		$data["id"] = $this->input->get('id', true);
+        $idProduk = $this->input->get('id', true);
+
+        if (isset($data["id"])) {
+            $this->db->where('id_produk', $data['id']);
+            $cek = $this->db->get('tb_produk');
+
+            if ($cek->num_rows() == 0) {
+                redirect(base_url());
+            } else {
+		$data['tittle'] = "Detail | Dunia Ilmu";
+		$data['product'] = $this->db->where('id_produk', $idProduk)->get('tb_produk')->row_array();
+		$data['isi'] = $this->load->view('detail', $data, true);
+		$this->load->view('main_view', $data);
+		
+	}
+} else {
+	redirect(base_url());
+}
 	}
 }
