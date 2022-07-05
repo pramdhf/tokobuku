@@ -70,5 +70,3 @@
 
 </div>
 <!-- End of Content Wrapper -->
-
-<?php $this->load->view('templates/modal'); ?>
