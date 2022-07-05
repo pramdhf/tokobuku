@@ -25,49 +25,51 @@
         <div class="card-body">
             <form action="" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="id_produk" value="<?php echo $produk->id_produk ?>">
+                <?php foreach ($produk as $row) : ?>
+                    <input type="hidden" name="id_produk" value="<?php echo $row->id_produk ?>">
 
-                <div class="form-group">
-                    <label for="productName">Nama Produk</label>
-                    <input class="form-control <?php echo form_error('productName') ? 'is-invalid' : '' ?>" type="text" name="productName" placeholder="Nama Produk" value="<?= $produk->productName ?>" />
-                    <div class="invalid-feedback">
-                        <?php echo form_error('productName') ?>
+                    <div class="form-group">
+                        <label for="productName">Nama Produk</label>
+                        <input class="form-control <?php echo form_error('productName') ? 'is-invalid' : '' ?>" type="text" name="productName" placeholder="Nama Produk" value="<?= $row->productName ?>" />
+                        <div class="invalid-feedback">
+                            <?php echo form_error('productName') ?>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    <label for="img">Foto Produk</label>
-                    <input class="form-control-file <?php echo form_error('img') ? 'is-invalid' : '' ?>" type="file" name="img" value="<?= $produk->img ?>" />
-                    <div class="invalid-feedback">
-                        <?php echo form_error('img') ?>
+                    <div class="form-group">
+                        <label for="img">Foto Produk</label>
+                        <input class="form-control-file <?php echo form_error('img') ? 'is-invalid' : '' ?>" type="file" name="img" value="<?= $row->img ?>" required />
+                        <div class="invalid-feedback">
+                            <?php echo form_error('img') ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="stock">Stok</label>
-                    <input class="form-control <?php echo form_error('stock') ? 'is-invalid' : '' ?>" type="number" name="stock" min="0" placeholder="Stok Produk" value="<?= $produk->stock ?>" />
-                    <div class="invalid-feedback">
-                        <?php echo form_error('stock') ?>
+                    <div class="form-group">
+                        <label for="stock">Stok</label>
+                        <input class="form-control <?php echo form_error('stock') ? 'is-invalid' : '' ?>" type="number" name="stock" min="0" placeholder="Stok Produk" value="<?= $row->stock ?>" />
+                        <div class="invalid-feedback">
+                            <?php echo form_error('stock') ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="categoryId">ID Kategori</label>
-                    <input class="form-control <?php echo form_error('categoryId') ? 'is-invalid' : '' ?>" type="number" name="categoryId" min="0" placeholder="Kategori ID" value="<?= $produk->categoryId ?>" />
-                    <div class="invalid-feedback">
-                        <?php echo form_error('categoryId') ?>
+                    <div class="form-group">
+                        <label for="categoryId">ID Kategori</label>
+                        <input class="form-control <?php echo form_error('categoryId') ? 'is-invalid' : '' ?>" type="number" name="categoryId" min="0" placeholder="Kategori ID" value="<?= $row->categoryId ?>" />
+                        <div class="invalid-feedback">
+                            <?php echo form_error('categoryId') ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="price">Harga</label>
-                    <input class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>" type="number" name="price" min="0" placeholder="Harga Produk" value="<?= $produk->price ?>" />
-                    <div class="invalid-feedback">
-                        <?php echo form_error('price') ?>
+                    <div class="form-group">
+                        <label for="price">Harga</label>
+                        <input class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>" type="number" name="price" min="0" placeholder="Harga Produk" value="<?= $row->price ?>" />
+                        <div class="invalid-feedback">
+                            <?php echo form_error('price') ?>
+                        </div>
                     </div>
-                </div>
 
+                <?php endforeach; ?>
                 <input class="btn btn-success" type="submit" name="btn" value="Save" />
             </form>
         </div>

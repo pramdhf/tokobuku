@@ -51,14 +51,14 @@ class Produk extends CI_Controller
         $validation->set_rules($produk->rules());
 
         if ($validation->run()) {
-            $produk->update();
+            $produk->update($id);
             $this->session->set_flashdata('success', 'Berhasil disimpan');
         }
 
-        $data["produk"] = $produk->getById($id);
+        $data["produk"] = $this->db->where('id_produk', $id)->get('tb_produk')->result();
         if (!$data["produk"]) show_404();
 
-        $this->load->view("admin/produk/edit_form", $data);
+        $this->load->view("admin/produk/update_produk", $data);
     }
 
     public function delete($id = null)

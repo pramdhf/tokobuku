@@ -35,17 +35,21 @@
                             <th>Stok</th>
                             <th>Kategori</th>
                             <th>Harga</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <?php foreach ($produk as $product) : ?>
                             <tr>
-                                <td><?= $product["id_produk"]; ?></td>
-                                <td><?= $product["productName"]; ?></td>
-                                <td><img src="<?= base_url(); ?>assets/img/<?= $product['img'] ?>" alt="" width="100"></td>
-                                <td><?= $product["stock"]; ?></td>
-                                <td><?= $product["categoryId"]; ?></td>
-                                <td><?= $product["price"]; ?></td>
+                                <td><?= $product->id_produk ?></td>
+                                <td><?= $product->productName ?></td>
+                                <td><img src="<?= base_url('assets/img/' . $product->img) ?>" alt="" width="100"></td>
+                                <td><?= $product->stock ?></td>
+                                <td><?= $product->categoryId ?></td>
+                                <td><?= $product->price ?></td>
+                                <td><a href="<?php echo site_url('admin/produk/edit/' . $product->id_produk) ?>" class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="<?= base_url('admin/produk/delete/' . $product->id_produk) ?>" class="btn btn-small text-danger" onclick="if(!confirm('Hapus data ini?')){ return false; }">Hapus
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -66,3 +70,5 @@
 
 </div>
 <!-- End of Content Wrapper -->
+
+<?php $this->load->view('templates/modal'); ?>

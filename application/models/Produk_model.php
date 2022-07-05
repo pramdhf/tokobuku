@@ -38,7 +38,7 @@ class Produk_model extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get($this->_table)->result_array();
+        return $this->db->get($this->_table)->result();
     }
 
     public function getById($id)
@@ -77,16 +77,36 @@ class Produk_model extends CI_Model
         }
     }
 
-    public function update()
+    public function update($id)
     {
-        $post = $this->input->post();
-        $this->id_produk = uniqid();
-        $this->productName = $post["productName"];
-        $this->img = $post["img"];
-        $this->stock = $post["stock"];
-        $this->categoryId = $post["categoryId"];
-        $this->price = $post["price"];
-        return $this->db->update($this->_table, $this, array('id_produk' => $post['id']));
+        $gambar = $_FILES['img'];
+
+
+        if ($gambar['name'] != NULL) {
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size'] = 2000;
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('img')) {
+                $err = $this->upload->display_errors();
+                echo $err;
+                die();
+                die();
+            } else {
+                $gambar = $this->upload->data('file_name');
+            }
+            $post = $this->input->post();
+            $this->id_produk = uniqid();
+            $this->productName = $post["productName"];
+            $this->img = $gambar;
+            $this->stock = $post["stock"];
+            $this->categoryId = $post["categoryId"];
+            $this->price = $post["price"];
+            return $this->db->update($this->_table, $this, array('id_produk' => $id));
+        }
     }
 
     public function delete($id)
