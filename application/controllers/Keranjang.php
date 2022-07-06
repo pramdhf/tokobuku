@@ -29,6 +29,7 @@ class Keranjang extends CI_Controller {
     public function tambah($id)
 
 	{
+        if ($this->session->userdata('email')) {
 		$barang = $this->db->where('id_produk', $id)->get('tb_produk')->row();
 
 		$data = array(
@@ -41,7 +42,13 @@ class Keranjang extends CI_Controller {
 
     $this->cart->insert($data);
 	redirect(base_url('shop'));
+} else {
+    echo '<script type="text/javascript">';
+            echo 'alert("Harap Login Terlebih Dahulu!");';
+            echo 'window.location.href ="' . base_url() .  'auth";';
+            echo '</script>';
 }
+    }
 
 public function remove($rowid)
     {
@@ -50,6 +57,16 @@ public function remove($rowid)
             'qty'           => 0
         );
          $this->cart->update($removed_cart);
+         redirect(base_url('keranjang'));
+    }
+
+    public function update($rowid)
+    {
+        $data = array(
+            'rowid'         => $rowid,
+            'qty'           => 0
+        );
+        $this->cart->update($data);
          redirect(base_url('keranjang'));
     }
 }

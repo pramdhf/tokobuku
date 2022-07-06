@@ -1,5 +1,5 @@
- <!-- Navbar Start -->
- <div class="container-fluid">
+<!-- Navbar Start -->
+<div class="container-fluid">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
@@ -43,66 +43,60 @@
     </div>
     <!-- Navbar End -->
 <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
+<div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
             <div class="d-inline-flex">
                 <p class="m-0"><a href="">Home</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Shopping Cart</p>
+                <p class="m-0">Checkout</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Cart Start -->
+    <!-- Checkout Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <table class="table table-bordered text-center mb-0">
-                    <thead class="bg-secondary text-dark">
-                        <tr>
-                            <th>Products</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody class="align-middle">
-                    <?php foreach ($this->cart->contents() as $items) : ?>
-                        <tr>
-                            <td class="align-middle"><img src="<?= base_url(); ?>assets/img/<?=$items['img']?>" width="200" alt="" style="width: 50px;"> <?=$items['name']?></td>
-                            <td class="align-middle">Rp <?php echo number_format($items['price'], 0,',','.')  ?></td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="<?=$items['qty']?>">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">Rp <?php echo number_format($items['subtotal'], 0,',','.')?></td>
-                            <td class="align-middle"> <a href="<?= base_url().'keranjang/remove/'.$items['rowid']; ?>"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></a></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="col-lg-8">
+                <div class="mb-4">
+                <form action="<?=base_url()?>checkout/order" method="post" enctype="multipart/form-data">
+                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Nama</label>
+                            <input class="form-control" type="text" placeholder="John" name="nama" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Alamat</label>
+                            <input class="form-control" type="text" placeholder="Doe" name="alamat" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>No Telepon</label>
+                            <input class="form-control" type="text" placeholder="0812969xxx" name="no_telp" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                    <label>Bukti Pembayaran</label>
+                    <input class="form-control" type="file" name="img" required/>
+                </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
                     </div>
                     <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <?php foreach ($this->cart->contents() as $items) : ?>
+                        <div class="d-flex justify-content-between">
+                            <p><?=$items['name'] ." x". $items['qty']?> </p>
+                            <p>Rp <?php echo number_format($items['price'], 0,',','.')  ?></p>
+                        </div>
+                        <?php endforeach; ?>
+                        <hr class="mt-0">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
                             <h6 class="font-weight-medium"><?php echo "Rp " . number_format($this->cart->total(), 0,',','.' ) ?></h6>
@@ -115,18 +109,43 @@
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">
-                                <?php 
+                            <h5 class="font-weight-bold"><?php 
                                 $total = $this->cart->total() + 10000;
                             echo "Rp " . number_format($total, 0,',','.' ) 
                             ?></h5>
                         </div>
-                        <a href="<?=base_url()?>checkout">
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
-                        </a>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="BNI" value="BNI">
+                                <label class="custom-control-label" for="BNI">BNI</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="BCA" value="BCA">
+                                <label class="custom-control-label" for="BCA">BCA</label>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="MANDIRI" value="MANDIRI">
+                                <label class="custom-control-label" for="MANDIRI">MANDIRI</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
-    <!-- Cart End -->
+    <!-- Checkout End -->
